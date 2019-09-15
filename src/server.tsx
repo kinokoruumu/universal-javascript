@@ -1,20 +1,12 @@
 import Express from "express";
-import * as React from "react";
-import * as ReactDOMServer from "react-dom/server";
-import Html from "./Html";
-import { App } from ".";
+import path from "path";
+import { router } from "./router/router";
 
 const app = Express();
 
-app.use(Express.static(__dirname + "/public"));
+app.use("/assets/", Express.static(path.join(__dirname, "../public")));
 
-app.get("*", (_: Express.Request, res: Express.Response) => {
-  ReactDOMServer.renderToNodeStream(
-    <Html>
-      <App />
-    </Html>
-  ).pipe(res);
-});
+app.use(router);
 
 const HOST = process.env.HOST || "0.0.0.0";
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;

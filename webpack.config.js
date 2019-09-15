@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const path = require("path");
 const WebpackBar = require("webpackbar");
 
@@ -40,6 +41,12 @@ module.exports = {
   plugins: [
     new WebpackBar({
       name: "bootstrap"
+    }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development")
+      },
+      "process.title": JSON.stringify("browser")
     })
   ]
 };

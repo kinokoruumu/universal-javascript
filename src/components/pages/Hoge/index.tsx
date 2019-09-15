@@ -1,0 +1,1 @@
+export { Hoge } from "./Hoge";

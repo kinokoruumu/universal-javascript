@@ -8,7 +8,7 @@ const Html: React.FunctionComponent = ({ children }) => {
       </head>
       <body>
         <div id="app">{children}</div>
-        {/* <script src="/public/bundle.js"></script> */}
+        <script src="/assets/bundle.js"></script>
       </body>
     </html>
   );

@@ -1,8 +1,20 @@
 import * as React from "react";
-import { Top } from "./components/pages/Top";
+import { Provider } from "react-redux";
+import { ConnectedRouter } from "connected-react-router";
+import { configureStore } from "./store/index";
+import { routes } from "./router/routes";
+import { hydrate } from "react-dom";
+import { createBrowserHistory } from "history";
+import { renderRoutes } from "react-router-config";
 
-const App: React.FunctionComponent = () => {
-  return <Top />;
-};
+const __STATE__ = (window as any).__STATE__;
 
-export { App };
+const history = createBrowserHistory();
+const store = configureStore(history, __STATE__);
+
+hydrate(
+  <Provider store={store}>
+    <ConnectedRouter history={history}>{renderRoutes(routes)}</ConnectedRouter>
+  </Provider>,
+  document.getElementById("app")
+);
