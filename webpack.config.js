@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const WebpackBar = require("webpackbar");
+const ManifestPlugin = require("webpack-manifest-plugin");
 
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
 
@@ -14,7 +15,10 @@ module.exports = {
   devtool: "#source-map",
   output: {
     path: path.resolve(__dirname, "./public"),
-    filename: "bundle.js"
+    filename: "[name].[chunkhash].js",
+    publicPath: "/assets/",
+    chunkFilename: "[name].[chunkhash].js",
+    sourceMapFilename: "[name].[chunkhash].js.map"
   },
   resolve: {
     modules: [path.resolve("./src"), path.resolve("./node_modules")],
@@ -38,6 +42,12 @@ module.exports = {
       }
     ]
   },
+  optimization: {
+    splitChunks: {
+      name: "vendor",
+      chunks: "initial"
+    }
+  },
   plugins: [
     new WebpackBar({
       name: "bootstrap"
@@ -47,6 +57,14 @@ module.exports = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development")
       },
       "process.title": JSON.stringify("browser")
+    }),
+    new ManifestPlugin({
+      fileName: path.join(__dirname, "./build/chunk-manifest.json"),
+      filter: file => file.isChunk && file.name && file.name.endsWith(".js"),
+      map: file => {
+        file.name = file.name.replace(/\.js$/, "");
+        return file;
+      }
     })
   ]
 };
