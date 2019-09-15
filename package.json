@@ -1,0 +1,41 @@
+{
+  "name": "universal-javascript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "ssh://git@github.com/kinokoruumu/universal-javascript.git",
+  "author": "Kazuki Nishikawa <kinokoruumu@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.1",
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
+    "@types/webpack": "^4.39.1",
+    "@types/webpackbar": "^2.6.0",
+    "cache-loader": "^4.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "npm-run-all": "^4.1.5",
+    "pm2": "^3.5.1",
+    "ts-loader": "^6.1.0",
+    "typescript": "^3.6.3",
+    "wait-on": "^3.3.0",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.8",
+    "webpack-manifest-plugin": "^2.0.4",
+    "webpackbar": "^4.0.0"
+  },
+  "scripts": {
+    "dev": "npm-run-all -s clean -p build:watch serve",
+    "clean": "rm -rf public",
+    "serve": "pm2 start pm2-local.json --no-daemon",
+    "build:watch": "npm-run-all -p build:client:watch build:server:watch",
+    "build:client": "webpack-cli --config webpack.config.js",
+    "build:client:watch": "yarn build:client --watch",
+    "build:server": "tsc --project .",
+    "build:server:watch": "yarn build:server --watch"
+  }
+}

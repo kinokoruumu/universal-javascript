@@ -1,0 +1,14 @@
+{
+  "apps": [
+    {
+      "name": "app",
+      "script": "./build/server.js",
+      "watch": ["./src"],
+      "ignore_watch": ["./**/*.map"],
+      "restart_delay": 300,
+      "env": {
+        "NODE_ENV": "development"
+      }
+    }
+  ]
+}
