@@ -1,6 +1,6 @@
 import Express from "express";
 import path from "path";
-import { router } from "./router/router";
+import { router } from "./router/serverRouter";
 
 const app = Express();
 

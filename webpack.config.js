@@ -11,7 +11,7 @@ const IS_PRODUCTION = process.env.NODE_ENV === "production";
 module.exports = {
   target: "web",
   mode: IS_PRODUCTION ? "production" : "development",
-  entry: path.resolve(__dirname, "./src/index.tsx"),
+  entry: path.resolve(__dirname, "./src/router/clientRouter.tsx"),
   devtool: "#source-map",
   output: {
     path: path.resolve(__dirname, "./public"),

@@ -3,7 +3,7 @@ import * as React from "react";
 import * as ReactDOMServer from "react-dom/server";
 import { Provider } from "react-redux";
 import { StaticRouter } from "react-router-dom";
-import { routes } from "../router/routes";
+import { routes } from "./routes";
 import { configureStore } from "../store";
 import { createMemoryHistory } from "history";
 import Html from "./Html";
