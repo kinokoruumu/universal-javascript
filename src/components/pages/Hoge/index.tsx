@@ -1,1 +1,2 @@
-export { Hoge } from "./Hoge";
+import { Hoge } from "./Hoge";
+export default Hoge;
